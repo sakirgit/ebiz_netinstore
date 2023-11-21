@@ -9,5 +9,27 @@
 */
 
 
+.single-product .summary-inner table td{
+   border: 0;
+   padding: 10px;
+   padding-left: 0;
+}
+.short_description_tbl p{
+   margin-bottom: 8px;
+}
 
+.woocommerce-product-details__short-description {
+   margin-bottom: 0;
+}
+.in-stock{
+   color: rgb(0, 202, 0);
+   font-weight: bold;
+}
+.out-of-stock{
+   color: red;
+}
+
+.single-product-page .summary-inner table{
+   margin: 0;
+}
 

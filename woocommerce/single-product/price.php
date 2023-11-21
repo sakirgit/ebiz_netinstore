@@ -33,11 +33,7 @@ global $product;
 	 <?php 
 		if (in_array("switch", $parent_category_slugs)){ ?>
 		<tr>
-		  <td><label for="power_poe">Model Name:</label></td>
-		  <td><?php echo esc_attr(get_post_meta($product->id, 'model_name', true)); ?></td>
-		</tr>
-		<tr>
-		  <td><label for="power_poe">Power PoE:</label></td>
+		  <td><label for="power_poe">Power Supply:</label></td>
 		  <td><?php echo esc_attr(get_post_meta($product->id, 'power_poe', true)); ?></td>
 		</tr>
 		<tr>
@@ -49,12 +45,57 @@ global $product;
 		  <td><?php echo esc_attr(get_post_meta($product->id, 'switching_capacity', true)); ?></td>
 		</tr>
 		<tr>
+		  <td><label for="switching_capacity">Forwarding Rate:</label></td>
+		  <td><?php echo esc_attr(get_post_meta($product->id, 'forwarding_rate', true)); ?></td>
+		</tr>
+		<tr>
 		  <td><label for="mac_table">MAC Table:</label></td>
 		  <td><?php echo esc_attr(get_post_meta($product->id, 'mac_table', true)); ?></td>
 		</tr>
 		<tr>
+		  <td><label for="warranty">Availability:</label></td>
+			<td>
+				<?php 
+					$stock_status = "";
+					if( $product->get_stock_status() == "outofstock" ){
+						$stock_status = "<span class='out-of-stock'>Out of stock</span>";
+					}else if( $product->get_stock_status() == "instock" ){
+						$stock_status = "<span class='in-stock'>In stock</span>";
+					}else{
+						$stock_status = "On backorder";
+					}
+					echo $stock_status; 
+				?>
+			</td>
+		</tr>
+		<tr>
 		  <td><label for="warranty">Warranty:</label></td>
-		  <td><?php echo esc_attr(get_post_meta($product->id, 'warranty', true)); ?></td>
+		  <td><?php 
+		  $warranty =  get_post_meta($product->id, 'warranty', true);
+		  
+			if( $warranty == "1 Year" ){
+				$warranty = "<img src='" . get_stylesheet_directory_uri() . "/images/warranty/icon_1-year-warranty.png' />";
+			}else if( $warranty == "2 Years" ){
+				$warranty = "<img src='" . get_stylesheet_directory_uri() . "/images/warranty/icon_2-years-warranty.png' />";
+			}else if( $warranty == "3 Years" ){
+				$warranty = "<img src='" . get_stylesheet_directory_uri() . "/images/warranty/icon_3-years-warranty.png' />";
+			}else if( $warranty == "4 Years" ){
+				$warranty = "<img src='" . get_stylesheet_directory_uri() . "/images/warranty/icon_4-years-warranty.png' />";
+			}else if( $warranty == "5 Years" ){
+				$warranty = "<img src='" . get_stylesheet_directory_uri() . "/images/warranty/icon_5-years-warranty.png' />";
+			}else if( $warranty == "6 Years" ){
+				$warranty = "<img src='" . get_stylesheet_directory_uri() . "/images/warranty/icon_6-years-warranty.png' />";
+			}else if( $warranty == "7 Years" ){
+				$warranty = "<img src='" . get_stylesheet_directory_uri() . "/images/warranty/icon_7-years-warranty.png' />";
+			}else if( $warranty == "8 Years" ){
+				$warranty = "<img src='" . get_stylesheet_directory_uri() . "/images/warranty/icon_8-years-warranty.png' />";
+			}else if( $warranty == "9 Years" ){
+				$warranty = "<img src='" . get_stylesheet_directory_uri() . "/images/warranty/icon_9-years-warranty.png' />";
+			}else if( $warranty == "10 Years" ){
+				$warranty = "<img src='" . get_stylesheet_directory_uri() . "/images/warranty/icon_10-years-warranty.png' />";
+			}
+		  	echo $warranty; 
+			?></td>
 		</tr>
 	 <?php 
 	} else {
@@ -62,4 +103,12 @@ global $product;
 	} ?>
 	 </tbody>
 	 </table>
-<p class="<?php echo esc_attr( apply_filters( 'woocommerce_product_price_class', 'price' ) ); ?>"><?php echo $product->get_price_html(); ?></p>
+<p class="<?php echo esc_attr( apply_filters( 'woocommerce_product_price_class', 'price' ) ); ?>">
+<?php 
+	if( empty($product->get_price_html()) ){
+		echo "Call for price";
+	}else{
+		echo $product->get_price_html();
+	} 
+?>
+</p>
