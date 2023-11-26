@@ -33,27 +33,27 @@ global $product;
 	 <?php 
 		if (in_array("switch", $parent_category_slugs)){ ?>
 		<tr>
-		  <td><label for="power_poe">Power Supply:</label></td>
-		  <td><?php echo esc_attr(get_post_meta($product->id, 'power_poe', true)); ?></td>
+		  <td><label for="">Power Supply :</label></td>
+		  <td><?php echo esc_attr(get_post_meta($product->id, '_power_supply', true)); ?></td>
 		</tr>
 		<tr>
-		  <td><label for="form_factor">Form Factor:</label></td>
-		  <td><?php echo esc_attr(get_post_meta($product->id, 'form_factor', true)); ?></td>
+		  <td><label for="">Form Factor:</label></td>
+		  <td><?php echo esc_attr(get_post_meta($product->id, '_form_factor', true)); ?></td>
 		</tr>
 		<tr>
-		  <td><label for="switching_capacity">Switching Capacity:</label></td>
-		  <td><?php echo esc_attr(get_post_meta($product->id, 'switching_capacity', true)); ?></td>
+		  <td><label for="">Switching Capacity:</label></td>
+		  <td><?php echo esc_attr(get_post_meta($product->id, '_switching_capacity', true)); ?></td>
 		</tr>
 		<tr>
-		  <td><label for="switching_capacity">Forwarding Rate:</label></td>
-		  <td><?php echo esc_attr(get_post_meta($product->id, 'forwarding_rate', true)); ?></td>
+		  <td><label for="">Forwarding Rate:</label></td>
+		  <td><?php echo esc_attr(get_post_meta($product->id, '_forwarding_rate', true)); ?></td>
 		</tr>
 		<tr>
-		  <td><label for="mac_table">MAC Table:</label></td>
-		  <td><?php echo esc_attr(get_post_meta($product->id, 'mac_table', true)); ?></td>
+		  <td><label for="">MAC Table:</label></td>
+		  <td><?php echo esc_attr(get_post_meta($product->id, '_mac_table', true)); ?></td>
 		</tr>
 		<tr>
-		  <td><label for="warranty">Availability:</label></td>
+		  <td><label for="">Availability:</label></td>
 			<td>
 				<?php 
 					$stock_status = "";
@@ -69,9 +69,9 @@ global $product;
 			</td>
 		</tr>
 		<tr>
-		  <td><label for="warranty">Warranty:</label></td>
+		  <td><label for="">Warranty:</label></td>
 		  <td><?php 
-		  $warranty =  get_post_meta($product->id, 'warranty', true);
+		  $warranty =  get_post_meta($product->id, '_warranty', true);
 		  
 			if( $warranty == "1 Year" ){
 				$warranty = "<img src='" . get_stylesheet_directory_uri() . "/images/warranty/icon_1-year-warranty.png' />";

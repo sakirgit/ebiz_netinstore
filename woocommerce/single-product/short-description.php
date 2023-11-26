@@ -25,6 +25,16 @@ global $product;
 $short_description = apply_filters( 'woocommerce_short_description', $post->post_excerpt );
 
 if ( ! $short_description ) {
+	?>
+	<div class="woocommerce-product-details__short-description">
+		<table class="short_description_tbl">
+			<tr>
+				<td><label>Description: </label></td>
+				<td></td>
+			</tr>
+		</table>
+	</div>
+	<?php 
 	return;
 }
 

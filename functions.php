@@ -1,4 +1,10 @@
 <?php
+   function get_product_by_sku( $sku ) {
+    global $wpdb;
+    $product_id = $wpdb->get_var( $wpdb->prepare( "SELECT post_id FROM $wpdb->postmeta WHERE meta_key='_sku' AND meta_value='%s' LIMIT 1", $sku ) );
+    if ( $product_id ) return new WC_Product( $product_id );
+    return null;
+ }
 /**
  * Enqueue script and styles for child theme
  */
@@ -74,9 +80,18 @@ function woocommerce_template_single_excerpt() {
 	<table class="short_description_tbl">
 	 <tr>
 		  <td><label for="power_poe">Model Name:</label></td>
-		  <td><?php echo esc_attr(get_post_meta($product->id, 'model_name', true)); ?></td>
+		  <td><?php echo esc_attr(get_post_meta($product->id, '_model_name', true)); ?></td>
 		</tr>
 	</table>
 <?php 
     wc_get_template( 'single-product/short-description.php' );
 }
+
+
+/* ======================= Get all parent category slugs by product ID =========================== */
+
+
+
+include_once 'inc/product_img_upload.php';
+
+
