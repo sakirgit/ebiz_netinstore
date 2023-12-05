@@ -21,6 +21,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 global $product;
 	$parent_category_slugs = get_all_parent_category_slugs_by_product_id($product->id);
+
+	$terms = get_the_terms ( $product->id, 'product_cat' );
+	foreach ( $terms as $term ) {
+		array_push($parent_category_slugs, $term->slug);
+	}
+
 	/*
 	echo "<pre>";
 	print_r($parent_category_slugs);
@@ -52,6 +58,108 @@ global $product;
 		  <td><label for="">MAC Table:</label></td>
 		  <td><?php echo esc_attr(get_post_meta($product->id, '_mac_table', true)); ?></td>
 		</tr>
+	 <?php 
+	} else if (in_array("router", $parent_category_slugs)){ ?>
+	
+		<tr>
+			<td><label for="">Rack Mount :</label></td>
+			<td><?php echo esc_attr(get_post_meta($product->id, '_rack_mount', true)); ?></td>
+		</tr>
+		<tr>
+			<td><label for="">Interface:</label></td>
+			<td><?php echo esc_attr(get_post_meta($product->id, '_interface', true)); ?></td>
+		</tr>
+	<?php	} else if (in_array("firewall", $parent_category_slugs)){ ?>
+	
+		<tr>
+			<td><label for="">Rack Mount :</label></td>
+			<td><?php echo esc_attr(get_post_meta($product->id, '_rack_mount_fw', true)); ?></td>
+		</tr>
+		<tr>
+			<td><label for="">NGFW Throughput:</label></td>
+			<td><?php echo esc_attr(get_post_meta($product->id, '_ngfw_throughput', true)); ?></td>
+		</tr>
+		<tr>
+			<td><label for="">Threat Protection Throughput:</label></td>
+			<td><?php echo esc_attr(get_post_meta($product->id, '_threat_protection_throughput', true)); ?></td>
+		</tr>
+		<tr>
+			<td><label for="">New Sessions sec:</label></td>
+			<td><?php echo esc_attr(get_post_meta($product->id, '_new_sessions_sec', true)); ?></td>
+		</tr>
+		<tr>
+			<td><label for="">Concurrent Sessions:</label></td>
+			<td><?php echo esc_attr(get_post_meta($product->id, '_concurrent_sessions', true)); ?></td>
+		</tr>
+	<?php	} else if (in_array("ip-telephony", $parent_category_slugs)){ ?>
+	
+		<tr>
+			<td><label for="">PoE_Option :</label></td>
+			<td><?php echo esc_attr(get_post_meta($product->id, '_PoE_Option', true)); ?></td>
+		</tr>
+		<tr>
+			<td><label for="">Adapter:</label></td>
+			<td><?php echo esc_attr(get_post_meta($product->id, '_Adapter', true)); ?></td>
+		</tr>
+		<tr>
+			<td><label for="">SIP:</label></td>
+			<td><?php echo esc_attr(get_post_meta($product->id, '_SIP', true)); ?></td>
+		</tr>
+		<tr>
+			<td><label for="">Lines:</label></td>
+			<td><?php echo esc_attr(get_post_meta($product->id, '_Lines', true)); ?></td>
+		</tr>
+		<tr>
+			<td><label for="">Conference_Call:</label></td>
+			<td><?php echo esc_attr(get_post_meta($product->id, '_Conference_Call', true)); ?></td>
+		</tr>
+	<?php	} else if (in_array("ip-telephony", $parent_category_slugs)){ ?>
+	
+	<tr>
+		<td><label for="">PoE_Option :</label></td>
+		<td><?php echo esc_attr(get_post_meta($product->id, '_PoE_Option', true)); ?></td>
+	</tr>
+	<tr>
+		<td><label for="">Adapter:</label></td>
+		<td><?php echo esc_attr(get_post_meta($product->id, '_Adapter', true)); ?></td>
+	</tr>
+	<tr>
+		<td><label for="">SIP:</label></td>
+		<td><?php echo esc_attr(get_post_meta($product->id, '_SIP', true)); ?></td>
+	</tr>
+	<tr>
+		<td><label for="">Lines:</label></td>
+		<td><?php echo esc_attr(get_post_meta($product->id, '_Lines', true)); ?></td>
+	</tr>
+	<tr>
+		<td><label for="">Conference_Call:</label></td>
+		<td><?php echo esc_attr(get_post_meta($product->id, '_Conference_Call', true)); ?></td>
+	</tr>
+<?php	}  else if (in_array("wi-fi", $parent_category_slugs)){ ?>
+	
+	<tr>
+		<td><label for="">Wi_Fi :</label></td>
+		<td><?php echo esc_attr(get_post_meta($product->id, '_Wi_Fi', true)); ?></td>
+	</tr>
+	<tr>
+		<td><label for="">SSID_Security:</label></td>
+		<td><?php echo esc_attr(get_post_meta($product->id, '_SSID_Security', true)); ?></td>
+	</tr>
+	<tr>
+		<td><label for="">Antena:</label></td>
+		<td><?php echo esc_attr(get_post_meta($product->id, '_Antena', true)); ?></td>
+	</tr>
+	<tr>
+		<td><label for="">Mimo_Streams:</label></td>
+		<td><?php echo esc_attr(get_post_meta($product->id, '_Mimo_Streams', true)); ?></td>
+	</tr>
+	<tr>
+		<td><label for="">PoE_Injector:</label></td>
+		<td><?php echo esc_attr(get_post_meta($product->id, '_PoE_Injector', true)); ?></td>
+	</tr>
+<?php	} ?>
+
+	
 		<tr>
 		  <td><label for="">Availability:</label></td>
 			<td>
@@ -61,9 +169,8 @@ global $product;
 						$stock_status = "<span class='out-of-stock'>Out of stock</span>";
 					}else if( $product->get_stock_status() == "instock" ){
 						$stock_status = "<span class='in-stock'>In stock</span>";
-					}else{
-						$stock_status = "On backorder";
 					}
+					
 					echo $stock_status; 
 				?>
 			</td>
@@ -97,12 +204,10 @@ global $product;
 		  	echo $warranty; 
 			?></td>
 		</tr>
-	 <?php 
-	} else {
-		echo "";
-	} ?>
 	 </tbody>
 	 </table>
+
+
 <p class="<?php echo esc_attr( apply_filters( 'woocommerce_product_price_class', 'price' ) ); ?>">
 <?php 
 	if( empty($product->get_price_html()) ){

@@ -93,5 +93,12 @@ function woocommerce_template_single_excerpt() {
 
 
 include_once 'inc/product_img_upload.php';
+include_once 'inc/product-compare-sc.php';
+
+/* ======================= ========================================== =========================== */
+
+
+
+
 
 
